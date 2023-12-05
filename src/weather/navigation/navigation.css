@@ -1,0 +1,41 @@
+.list-group-item {
+    padding: 0;
+}
+
+.list-group-item.active {
+    background-color: white;
+    color: red;
+}
+
+.navigation {
+    background-color: black;
+    color: white;
+    width: 85px;
+    flex-direction: column;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 0;
+}
+
+.navigation_item {
+    background-color: black;
+    color: white;
+    border: 0;
+    padding-bottom: 5px;
+}
+
+.navigation img {
+    width: 100%;
+    height: auto;
+}
+
+.navigation_icon {
+    color: red;
+    font-size: 2em;
+    padding-top: 5px;
+}
+
+.navigation_icon_user {
+    color: #D3D3D3;
+    font-size: 2em;
+}
