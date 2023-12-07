@@ -1,7 +1,7 @@
 import axios from "axios";
 export const BASE_API = process.env.REACT_APP_API_BASE;
 export const USERS_API = `${BASE_API}/users`;
-export const WEATHER_API = `${BASE_API}/weather`;
+
 const request = axios.create({
     withCredentials: true,
 });
