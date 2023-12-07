@@ -1,14 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
-import { FaBook} from "react-icons/fa";
+import { FaBook, FaCloudSunRain} from "react-icons/fa";
+import {FaArrowRightFromBracket, FaMagnifyingGlass} from "react-icons/fa6";
 import { BiUserCircle } from "react-icons/bi";
-import { RiDashboard3Fill } from "react-icons/ri";
 import "./navigation.css";
+
 function Navigation() {
-    const links = ["Account", "Home", "Search"];
+    const links = ["Home", "Search", "Profile", "Login", "Register"];
     const linkToIconMap = {
-        Account: <BiUserCircle className="navigation_icon_user align-content-center" />,
-        Home: <RiDashboard3Fill className="navigation_icon" />,
-        Search: <FaBook className="navigation_icon" />,
+        Profile: <BiUserCircle className="navigation_icon" />,
+        Home: <FaCloudSunRain className="navigation_icon" />,
+        Search: <FaMagnifyingGlass className="navigation_icon" />,
+        Login: <FaArrowRightFromBracket className="navigation_icon" />,
+        Register: <FaBook className="navigation_icon"/>,
     };
     const { pathname } = useLocation();
     return (
