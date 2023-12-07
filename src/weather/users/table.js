@@ -67,9 +67,8 @@ function UserTable() {
                     <td>
                         <select value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
                             <option value="USER">User</option>
-                            <option value="ADMIN">Admin</option>
-                            <option value="FACULTY">Faculty</option>
-                            <option value="STUDENT">Student</option>
+                            <option value="MODERATOR">Moderator</option>
+                            <option value="FORECASTER">Weather Forecaster</option>
                         </select>
                     </td>
                     <td className="text-nowrap">
@@ -87,7 +86,7 @@ function UserTable() {
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>
-                            <Link to={`/kanbas/profile/${user._id}`}>
+                            <Link to={`/profile/${user._id}`}>
                                 {user.username}
                             </Link>
                         </td>

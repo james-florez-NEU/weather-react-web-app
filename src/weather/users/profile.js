@@ -18,7 +18,7 @@ function Profile() {
     };
     const signout = async () => {
         await client.signout();
-        navigate("/kanbas/login");
+        navigate("/login");
     };
     useEffect(() => {
         if (id) {
@@ -62,7 +62,7 @@ function Profile() {
                 </div>
             )}
 
-            <Link to="/kanbas/admin/users" className="btn btn-warning w-100">
+            <Link to="/admin/users" className="btn btn-warning w-100">
                 Users
             </Link>
         </div>
