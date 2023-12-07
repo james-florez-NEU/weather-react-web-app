@@ -1,10 +1,13 @@
 import axios from "axios";
 export const BASE_API = process.env.REACT_APP_API_BASE;
 export const USERS_API = `${BASE_API}/users`;
+const WEATHER_API = `${BASE_API}/weather`;
 
 const request = axios.create({
     withCredentials: true,
 });
+
+// User Functions
 export const signin = async (credentials) => {
     const response = await request.post( `${USERS_API}/signin`, credentials );
     return response.data;
@@ -41,5 +44,15 @@ export const signup = async (credentials) => {
 };
 export const signout = async () => {
     const response = await request.post(`${USERS_API}/signout`);
+    return response.data;
+};
+
+// Weather Functions
+export const getWeather = async (id) => {
+    const response = await request.get(`${WEATHER_API}/current/${id}`);
+    return response.data;
+};
+export const searchLocations = async (key) => {
+    const response = await request.get(`${WEATHER_API}/search/${key}`);
     return response.data;
 };

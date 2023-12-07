@@ -1,4 +1,4 @@
-import * as client from "./client";
+import * as client from "../client/client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function Login() {

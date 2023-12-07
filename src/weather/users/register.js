@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as client from "./client";
+import * as client from "../client/client";
 function Register() {
     const [error, setError] = useState("");
     const [credentials, setCredentials] = useState({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {  BsFillCheckCircleFill, BsTrash3Fill, BsPlusCircleFill, BsPencil }
     from "react-icons/bs";
-import * as client from "./client";
+import * as client from "../client/client";
 import {Link} from "react-router-dom";
 function UserTable() {
     const [users, setUsers] = useState([]);
