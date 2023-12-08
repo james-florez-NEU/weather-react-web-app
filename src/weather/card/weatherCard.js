@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import * as client from "../client/client";
 
-const WeatherCard = () => {
+const WeatherCard = ({id}) => {
     const [weatherData, setWeatherData] = useState(null);
-    const id = 2801268;
 
     const fetchWeatherData = async () => {
         try {
-            const weather = await client.getWeather(2801268);
+            const weather = await client.getWeather(id);
             setWeatherData(weather);
         } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -16,6 +15,7 @@ const WeatherCard = () => {
     };
 
     useEffect(() => {
+        console.log(id);
         fetchWeatherData();
     }, []);
 
