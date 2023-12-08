@@ -1,7 +1,8 @@
 import axios from "axios";
 export const BASE_API = process.env.REACT_APP_API_BASE;
 export const USERS_API = `${BASE_API}/users`;
-const WEATHER_API = `${BASE_API}/weather`;
+export const WEATHER_API = `${BASE_API}/weather`;
+export const CHANNELS_API = `${BASE_API}/channels`;
 
 const request = axios.create({
     withCredentials: true,
@@ -56,3 +57,9 @@ export const searchLocations = async (key) => {
     const response = await request.get(`${WEATHER_API}/search/${key}`);
     return response.data;
 };
+
+// Channel Functions
+export const getChannels = async () => {
+    const response = await request.get(`${CHANNELS_API}`);
+    return response.data;
+}
