@@ -10,8 +10,9 @@ function Home () {
 
     const fetchAccount = async () => {
         try {
-            const account = await client.account();
-            setAccount(account);
+            const foundAccount = await client.account();
+            setAccount(foundAccount);
+            setFavorites(foundAccount.favorites);
         } catch (err) {
             if (err.response.status === 403) {
                 console.log("Not logged in");
@@ -23,9 +24,6 @@ function Home () {
 
     useEffect(() => {
         fetchAccount();
-        if (account) {
-            setFavorites(account.favorites);
-        }
     }, []);
 
     return (

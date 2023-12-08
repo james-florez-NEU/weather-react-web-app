@@ -15,7 +15,6 @@ const WeatherCard = ({id}) => {
     };
 
     useEffect(() => {
-        console.log(id);
         fetchWeatherData();
     }, []);
 
