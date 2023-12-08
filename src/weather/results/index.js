@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {setResults} from "./resultsReducer";
-import {searchLocations} from "../Client/client";
+// import {setResults} from "./resultsReducer";
+import {searchLocations} from "../client/client";
 
 function Results() {
     const {search} = useParams();
-    useEffect(() => {
-        searchLocations(search).then((results_effect) => dispatch(setResults(results_effect)));
-    }, [search]);
+    // useEffect(() => {
+    //     searchLocations(search).then((results_effect) => dispatch(setResults(results_effect)));
+    // }, [search]);
 
     // const results_test = useSelector((state) => state.resultsReducer.results);
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     return (
         <div>
