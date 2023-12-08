@@ -35,7 +35,6 @@ function Results() {
                                         <p>Country: {location.country}</p>
                                         <p>Latitude: {location.lat}</p>
                                         <p>Longitude: {location.lon}</p>
-                                        <p>ID: {location.id}</p>
                                     </li>
                                 </Link>
                             ))
