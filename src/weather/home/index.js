@@ -6,6 +6,7 @@ import * as client from "../client/client";
 function Home () {
     const [account, setAccount] = useState(null);
     const [favorites, setFavorites] = useState([]);
+    const [favoriteChannels, setFavoriteChannels] = useState([]);
     const [channels, setChannels] = useState([]);
     const majorCities = [2801268, 2593241, 2618724, 4059793, 803267, 3332210, 136022];
 
@@ -14,6 +15,7 @@ function Home () {
             const foundAccount = await client.account();
             setAccount(foundAccount);
             setFavorites(foundAccount.favorites);
+            setFavoriteChannels(foundAccount.favoriteChannels);
         } catch (err) {
             if (err.response.status === 403) {
                 console.log("Not logged in");
@@ -42,15 +44,35 @@ function Home () {
             <h1>Home</h1>
             <hr/>
 
-            {favorites && (
+            {(favorites.length !== 0) && (
                 <div>
-                    <h2>Your Favorites</h2>
+                    <h2>Your Favorite Cities</h2>
                     <hr/>
                     <div className="list-group">
                         {favorites.map((favorite, favoriteIndex) => (
                             <WeatherCard
                                 key={favoriteIndex}
                                 id={favorite} />
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {((favoriteChannels.length !== 0) && channels) && (
+                <div>
+                    <h2>Your Favorite Weather Channels</h2>
+                    <hr/>
+                    <div className="list-group">
+                        {channels
+                            .filter((channel) => favoriteChannels.includes(channel._id))
+                            .map((channel, channelIndex) => (
+                            <div className="list-group-item" key={channelIndex}>
+                                <h3>{channel.name}</h3>
+                                <p>Description: {channel.description}</p>
+                                <p>City: {channel.city}</p>
+                                <p>Region: {channel.region}</p>
+                                <p>Country: {channel.country}</p>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -66,7 +88,7 @@ function Home () {
                 ))}
             </div>
             <hr/>
-            <h2>Channels</h2>
+            <h2>Popular Weather Channels</h2>
             <hr/>
             {channels && (
                 <div className="list-group">
