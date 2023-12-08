@@ -9,6 +9,7 @@ import Register from "./weather/users/register";
 import UserTable from "./weather/users/table";
 import Search from "./weather/search";
 import Results from "./weather/results";
+import WeatherDetails from "./weather/details/weatherDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Routes>
                   <Route path="/"                   element={<Navigate to="/home"/>}/>
                   <Route path="/home"               element={<Home/>}/>
+                  <Route path="/details/*"          element={<WeatherDetails/>}/>
                   <Route path="/profile/*"          element={<Profile/>}/>
                   <Route path="/login"              element={<Login />} />
                   <Route path="/register"           element={<Register />} />

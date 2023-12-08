@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {Route, Routes} from "react-router";
 import {Link} from "react-router-dom";
-
 import * as client from "../client/client";
-import WeatherDetails from "../details/weatherDetails";
 
 const WeatherCard = () => {
     const [weatherData, setWeatherData] = useState(null);
@@ -25,7 +22,7 @@ const WeatherCard = () => {
     return (
         <div>
             {weatherData ? (
-                <Link to={`details/${id}`}>
+                <Link to={`../details/${id}`}>
                     <div className="card">
                         <div className="card-body">
                             <img src={weatherData.current.condition.icon} alt="Weather Icon" className="float-end" />
@@ -51,9 +48,6 @@ const WeatherCard = () => {
             ) : (
                 <p>Loading weather data...</p>
             )}
-            <Routes>
-                <Route path="details/:id" element={<WeatherDetails/>} />
-            </Routes>
         </div>
     );
 };
