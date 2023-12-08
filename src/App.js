@@ -7,6 +7,8 @@ import Profile from "./weather/users/profile";
 import Login from "./weather/users/login";
 import Register from "./weather/users/register";
 import UserTable from "./weather/users/table";
+import Search from "./weather/search";
+import Results from "./weather/results";
 
 function App() {
   return (
@@ -15,14 +17,16 @@ function App() {
             <Navigation />
             <div className="flex-fill">
               <Routes>
-                  <Route path="/"         element={<Navigate to="/home"/>}/>
-                  <Route path="/home"    element={<Home/>}/>
-                  <Route path="/profile/*" element={<Profile/>}/>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/profile/:id" element={<Profile />} />
-                  <Route path="/admin/users" element={<UserTable />} />
+                  <Route path="/"                   element={<Navigate to="/home"/>}/>
+                  <Route path="/home"               element={<Home/>}/>
+                  <Route path="/profile/*"          element={<Profile/>}/>
+                  <Route path="/login"              element={<Login />} />
+                  <Route path="/register"           element={<Register />} />
+                  <Route path="/profile"            element={<Profile />} />
+                  <Route path="/profile/:id"        element={<Profile />} />
+                  <Route path="/admin/users"        element={<UserTable />} />
+                  <Route path="/search"             element={<Search />} />
+                  <Route path="/results/:search"    element={<Results />} />
               </Routes>
             </div>
         </div>
