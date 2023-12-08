@@ -17,7 +17,7 @@ const WeatherDetails = () => {
 
     useEffect(() => {
         fetchWeatherData();
-    }, []);
+    }, [id]);
 
     return (
         <div>
