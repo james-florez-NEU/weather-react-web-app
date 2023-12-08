@@ -1,16 +1,19 @@
 import * as client from "../client/client";
 import { useState, useEffect } from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
+import WeatherCard from "../card/weatherCard";
 function Profile() {
     const { id } = useParams();
     const [account, setAccount] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
+    const [favorites, setFavorites] = useState([]);
     const navigate = useNavigate();
     const fetchAccount = async () => {
         try {
-            const account = await client.account();
-            setAccount(account);
+            const foundAccount = await client.account();
+            setAccount(foundAccount);
             setLoggedIn(true);
+            setFavorites(foundAccount.favorites);
         } catch (err) {
             if (err.response.status === 403) {
                 console.log("Not logged in");
@@ -100,6 +103,20 @@ function Profile() {
                         <button onClick={signout} className="btn btn-danger">
                             Signout
                         </button>
+
+                        {favorites && (
+                            <div>
+                                <h2>Your Favorites</h2>
+                                <hr/>
+                                <div className="list-group">
+                                    {favorites.map((favorite, favoriteIndex) => (
+                                        <WeatherCard
+                                            key={favoriteIndex}
+                                            id={favorite} />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 ) : (
                     <div className="p-3">
