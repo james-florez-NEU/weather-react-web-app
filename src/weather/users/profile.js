@@ -4,10 +4,20 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 function Profile() {
     const { id } = useParams();
     const [account, setAccount] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
     const fetchAccount = async () => {
-        const account = await client.account();
-        setAccount(account);
+        try {
+            const account = await client.account();
+            setAccount(account);
+            setLoggedIn(true);
+        } catch (err) {
+            if (err.response.status === 403) {
+                console.log("Not logged in");
+            } else {
+                console.log(err);
+            }
+        }
     };
     const findUserById = async (id) => {
         const user = await client.findUserById(id);
@@ -21,23 +31,22 @@ function Profile() {
         navigate("/login");
     };
     useEffect(() => {
-        if (id) {
-            findUserById(id);
+        fetchAccount();
+        if (loggedIn) {
+            if (id !== account._id) {
+                findUserById(id);
+            }
         } else {
-            fetchAccount();
+            if (id) {
+                findUserById(id);
+            }
         }
     }, []);
     return (
         <div className="ms-3 w-50">
             <h1>Profile</h1>
             {account && (
-                id ? (
-                    <div className="p-3">
-                        <p>Username: {account.username}</p>
-                        <p>First Name: {account.firstName}</p>
-                        <p>Role: {account.role}</p>
-                    </div>
-                ) : (
+                loggedIn ? (
                     <div className="p-3">
                         <label htmlFor={"username"}>Username: </label>
                         {account.username}
@@ -92,6 +101,12 @@ function Profile() {
                             Signout
                         </button>
                     </div>
+                ) : (
+                    <div className="p-3">
+                        <p>Username: {account.username}</p>
+                        <p>First Name: {account.firstName}</p>
+                        <p>Role: {account.role}</p>
+                     </div>
                     )
             )}
 
