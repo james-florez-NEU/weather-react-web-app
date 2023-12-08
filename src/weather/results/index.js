@@ -1,34 +1,45 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-// import {setResults} from "./resultsReducer";
-import {searchLocations} from "../client/client";
+import * as client from "../client/client";
 
 function Results() {
+    const [locations, setLocations] = useState(null);
     const {search} = useParams();
-    // useEffect(() => {
-    //     searchLocations(search).then((results_effect) => dispatch(setResults(results_effect)));
-    // }, [search]);
 
-    // const results_test = useSelector((state) => state.resultsReducer.results);
-    //const dispatch = useDispatch();
+    const fetchLocations = async () => {
+        try {
+            const foundLocations = await client.searchLocations(search);
+            setLocations(foundLocations);
+            console.log(foundLocations);
+        } catch (error) {
+            console.error('Error fetching locations:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchLocations();
+    }, [search]);
 
     return (
         <div>
-            <h1>Results</h1>
-            <h2>{search}</h2>
-
-            {/*<ul className="list-group flex-grow-2">*/}
-            {/*    {*/}
-            {/*        results_test*/}
-            {/*            .map((result, index) => (*/}
-            {/*                <li key={index} className="list-group-item">*/}
-            {/*                    <h3>{result.name}</h3>*/}
-            {/*                </li>*/}
-            {/*            ))*/}
-            {/*    }*/}
-            {/*</ul>*/}
-
+            <h1>Results for search "{search}"</h1>
+            {locations && (
+                <ul className="list-group flex-grow-2">
+                    {
+                        locations
+                            .map((location, index) => (
+                                <li key={index} className="list-group-item">
+                                    <h3>{location.name}</h3>
+                                    <p>Region: {location.region}</p>
+                                    <p>Country: {location.country}</p>
+                                    <p>Latitude: {location.lat}</p>
+                                    <p>Longitude: {location.lon}</p>
+                                    <p>ID: {location.id}</p>
+                                </li>
+                            ))
+                    }
+                </ul>
+            )}
         </div>
     );
 }
