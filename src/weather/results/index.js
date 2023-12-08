@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import * as client from "../client/client";
 
 function Results() {
@@ -28,14 +28,16 @@ function Results() {
                     {
                         locations
                             .map((location, index) => (
-                                <li key={index} className="list-group-item">
-                                    <h3>{location.name}</h3>
-                                    <p>Region: {location.region}</p>
-                                    <p>Country: {location.country}</p>
-                                    <p>Latitude: {location.lat}</p>
-                                    <p>Longitude: {location.lon}</p>
-                                    <p>ID: {location.id}</p>
-                                </li>
+                                <Link to={`../details/${location.id}`}>
+                                    <li key={index} className="list-group-item">
+                                        <h3>{location.name}</h3>
+                                        <p>Region: {location.region}</p>
+                                        <p>Country: {location.country}</p>
+                                        <p>Latitude: {location.lat}</p>
+                                        <p>Longitude: {location.lon}</p>
+                                        <p>ID: {location.id}</p>
+                                    </li>
+                                </Link>
                             ))
                     }
                 </ul>
