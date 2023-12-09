@@ -60,7 +60,7 @@ export const searchLocations = async (key) => {
 };
 
 // Channel Functions
-export const getChannels = async () => {
+export const getAllChannels = async () => {
     const response = await request.get(`${CHANNELS_API}`);
     return response.data;
 }

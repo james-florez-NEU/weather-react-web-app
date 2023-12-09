@@ -40,7 +40,7 @@ function Home () {
 
     const fetchChannels = async () => {
         try {
-            const foundChannels = await client.getChannels();
+            const foundChannels = await client.getAllChannels();
             setChannels(foundChannels);
         } catch (err) {
             console.log(err);
