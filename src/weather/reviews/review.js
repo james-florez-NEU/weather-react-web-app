@@ -45,7 +45,22 @@ const Review = () => {
         <div>
             <h2>Review Details</h2>
             {review ? (
-                <ReviewCard review={review} channels={channels} users={users} />
+                <div className="card">
+                    <div className="card-body">
+                        <p>Review of Weather
+                            Channel: {channels.find(channel => channel._id === review.channel_id)?.name || 'Channel Not Found'}</p>
+                        <p>Rating: {review.rating}/10</p>
+                        <p>Review: {review.message}</p>
+                        <p>Date: {review.date}</p>
+                        <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
+                        {review.flaggedForModeration && (
+                            <div>
+                                <h3>ATTENTION:</h3>
+                                <p>This review has been flagged for moderation</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
             ) : (
                 <p>Loading review data...</p>
             )}
