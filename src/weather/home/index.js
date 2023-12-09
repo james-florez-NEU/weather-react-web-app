@@ -86,17 +86,11 @@ function Home () {
                 <div>
                     <h2>Your Favorite Weather Channels</h2>
                     <hr/>
-                    <div className="list-group">
+                    <div className="d-flex flex-wrap">
                         {channels
                             .filter((channel) => favoriteChannels.includes(channel._id))
                             .map((channel, channelIndex) => (
-                            <div className="list-group-item" key={channelIndex}>
-                                <h3>{channel.name}</h3>
-                                <p>Description: {channel.description}</p>
-                                <p>City: {channel.city}</p>
-                                <p>Region: {channel.region}</p>
-                                <p>Country: {channel.country}</p>
-                            </div>
+                                <ChannelCard channel={channel} key={channelIndex} />
                         ))}
                     </div>
                 </div>
