@@ -182,8 +182,26 @@ function Profile() {
                         <p>Username: {account.username}</p>
                         <p>First Name: {account.firstName}</p>
                         <p>Role: {account.role}</p>
-                     </div>
-                    )
+
+
+                        {((reviews.length !== 0) && (channels.length !== 0)) && (
+                            <div>
+                                <h2>User's Reviews</h2>
+                                <hr/>
+                                <div className="d-flex flex-wrap">
+                                    {reviews
+                                        .filter((review) => review.user_id === account._id)
+                                        .map((review, reviewIndex) => (
+                                        <ReviewCard review={review}
+                                            channels = {channels}
+                                            users = {[account]}
+                                            key={reviewIndex} />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )
             )}
 
             <Link to="/admin/users" className="btn btn-warning w-100">
