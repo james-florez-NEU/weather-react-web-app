@@ -7,13 +7,17 @@ function Profile() {
     const [account, setAccount] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
     const [favorites, setFavorites] = useState([]);
+    const [favoriteChannels, setFavoriteChannels] = useState([]);
+    const [channels, setChannels] = useState([]);
     const navigate = useNavigate();
+
     const fetchAccount = async () => {
         try {
             const foundAccount = await client.account();
             setAccount(foundAccount);
             setLoggedIn(true);
             setFavorites(foundAccount.favorites);
+            setFavoriteChannels(foundAccount.favoriteChannels);
         } catch (err) {
             if (err.response.status === 403) {
                 console.log("Not logged in");
@@ -22,6 +26,14 @@ function Profile() {
             }
         }
     };
+    const fetchChannels = async () => {
+        try {
+            const foundChannels = await client.getChannels();
+            setChannels(foundChannels);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const findUserById = async (id) => {
         const user = await client.findUserById(id);
         setAccount(user);
@@ -35,6 +47,7 @@ function Profile() {
     };
     useEffect(() => {
         fetchAccount();
+        fetchChannels();
         if (loggedIn) {
             if (id !== account._id) {
                 findUserById(id);
@@ -106,7 +119,7 @@ function Profile() {
 
                         {favorites && (
                             <div>
-                                <h2>Your Favorites</h2>
+                                <h2>Your Favorite Cities</h2>
                                 <hr/>
                                 <div className="list-group">
                                     {favorites.map((favorite, favoriteIndex) => (
@@ -117,6 +130,27 @@ function Profile() {
                                 </div>
                             </div>
                         )}
+
+                        {((favoriteChannels.length !== 0) && channels) && (
+                            <div>
+                                <h2>Your Favorite Weather Channels</h2>
+                                <hr/>
+                                <div className="list-group">
+                                    {channels
+                                        .filter((channel) => favoriteChannels.includes(channel._id))
+                                        .map((channel, channelIndex) => (
+                                            <div className="list-group-item" key={channelIndex}>
+                                                <h3>{channel.name}</h3>
+                                                <p>Description: {channel.description}</p>
+                                                <p>City: {channel.city}</p>
+                                                <p>Region: {channel.region}</p>
+                                                <p>Country: {channel.country}</p>
+                                            </div>
+                                        ))}
+                                </div>
+                            </div>
+                        )}
+
                     </div>
                 ) : (
                     <div className="p-3">
