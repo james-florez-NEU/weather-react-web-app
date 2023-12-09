@@ -20,10 +20,10 @@ const WeatherDetails = () => {
     }, [id]);
 
     return (
-        <div>
+        <div className="ms-2">
             <h2>Weather Details</h2>
             {weatherData && (
-                <div>
+                <div className="card">
                     <img src={weatherData.current.condition.icon} alt="Weather Icon" className="float-end" />
                     <h3 className="card-title">{weatherData.location.name}</h3>
                     <p className="card-text">Temperature: {weatherData.current.temp_f}°F</p>
