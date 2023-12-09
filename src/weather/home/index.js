@@ -5,6 +5,7 @@ import * as client from "../client/client";
 
 function Home () {
     const [account, setAccount] = useState(null);
+    const [users, setUsers] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [favoriteChannels, setFavoriteChannels] = useState([]);
     const [channels, setChannels] = useState([]);
@@ -26,6 +27,15 @@ function Home () {
         }
     };
 
+    const fetchUsers = async () => {
+        try {
+            const foundUsers = await client.findAllUsers();
+            setUsers(foundUsers);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     const fetchChannels = async () => {
         try {
             const foundChannels = await client.getChannels();
@@ -46,6 +56,7 @@ function Home () {
 
     useEffect(() => {
         fetchAccount();
+        fetchUsers();
         fetchChannels();
         fetchNewestReviews();
     }, []);
@@ -126,11 +137,11 @@ function Home () {
                     <div className="list-group">
                         {newestReviews.map((review, reviewIndex) => (
                             <div className="list-group-item" key={reviewIndex}>
-                                <p>Weather Channel: {review.channel_id}</p>
+                                <p>Weather Channel: {channels.find(channel => channel._id === review.channel_id)?.name || 'Channel Not Found'}</p>
                                 <p>Rating: {review.rating}</p>
                                 <p>Review: {review.message}</p>
                                 <p>Date: {review.date}</p>
-                                <p>By: {review.user_id}</p>
+                                <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
                             </div>
                         ))}
                     </div>
