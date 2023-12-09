@@ -113,7 +113,10 @@ function Profile() {
                                onChange={(e) => setAccount({ ...account,
                                    email: e.target.value })}/>
                         <br/>
-                        <label htmlFor={"role"}>Role: </label>
+                        <label htmlFor={"currentRole"}>Current Role: </label>
+                        {account.role}
+                        <br/>
+                        <label htmlFor={"role"}>New Role: </label>
                         <select
                             id={"role"}
                             onChange={(e) => setAccount({ ...account,
@@ -203,10 +206,6 @@ function Profile() {
                     </div>
                 )
             )}
-
-            <Link to="/admin/users" className="btn btn-warning w-100">
-                Users
-            </Link>
         </div>
     );
 }
