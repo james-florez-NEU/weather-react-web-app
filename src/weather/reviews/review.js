@@ -44,7 +44,11 @@ const Review = () => {
     return (
         <div>
             <h2>Review Details</h2>
-            <ReviewCard review={review} channels={channels} users={users} />
+            {review ? (
+                <ReviewCard review={review} channels={channels} users={users} />
+            ) : (
+                <p>Loading review data...</p>
+            )}
         </div>
     );
 };

@@ -78,3 +78,7 @@ export const getNewestReviews = async () => {
     const response = await request.get(`${REVIEWS_API}/newest`);
     return response.data;
 }
+export const findReviewById = async (id) => {
+    const response = await request.get(`${REVIEWS_API}/${id}`);
+    return response.data;
+}
