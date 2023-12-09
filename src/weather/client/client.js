@@ -64,6 +64,10 @@ export const getAllChannels = async () => {
     const response = await request.get(`${CHANNELS_API}`);
     return response.data;
 }
+export const findChannelById = async (id) => {
+    const response = await request.get(`${CHANNELS_API}/${id}`);
+    return response.data;
+}
 
 // Review Functions
 export const getAllReviews = async () => {
