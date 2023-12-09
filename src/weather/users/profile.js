@@ -2,6 +2,9 @@ import * as client from "../client/client";
 import { useState, useEffect } from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import WeatherCard from "../card/weatherCard";
+import ChannelCard from "../card/channelCard";
+import ReviewCard from "../card/reviewCard";
+
 function Profile() {
     const { id } = useParams();
     const [account, setAccount] = useState(null);
@@ -9,6 +12,7 @@ function Profile() {
     const [favorites, setFavorites] = useState([]);
     const [favoriteChannels, setFavoriteChannels] = useState([]);
     const [channels, setChannels] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
 
     const fetchAccount = async () => {
@@ -34,6 +38,14 @@ function Profile() {
             console.log(err);
         }
     }
+    const fetchReviews = async () => {
+        try {
+            const foundReviews = await client.getAllReviews();
+            setReviews(foundReviews);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const findUserById = async (id) => {
         const user = await client.findUserById(id);
         setAccount(user);
@@ -48,6 +60,7 @@ function Profile() {
     useEffect(() => {
         fetchAccount();
         fetchChannels();
+        fetchReviews();
         if (loggedIn) {
             if (id !== account._id) {
                 findUserById(id);
@@ -117,11 +130,11 @@ function Profile() {
                             Signout
                         </button>
 
-                        {favorites && (
+                        {(favorites.length !== 0) && (
                             <div>
                                 <h2>Your Favorite Cities</h2>
                                 <hr/>
-                                <div className="list-group">
+                                <div className="d-flex flex-wrap">
                                     {favorites.map((favorite, favoriteIndex) => (
                                         <WeatherCard
                                             key={favoriteIndex}
@@ -131,25 +144,37 @@ function Profile() {
                             </div>
                         )}
 
-                        {((favoriteChannels.length !== 0) && channels) && (
+                        {((favoriteChannels.length !== 0) && (channels.length !== 0)) && (
                             <div>
                                 <h2>Your Favorite Weather Channels</h2>
                                 <hr/>
-                                <div className="list-group">
+                                <div className="d-flex flex-wrap">
                                     {channels
                                         .filter((channel) => favoriteChannels.includes(channel._id))
                                         .map((channel, channelIndex) => (
-                                            <div className="list-group-item" key={channelIndex}>
-                                                <h3>{channel.name}</h3>
-                                                <p>Description: {channel.description}</p>
-                                                <p>City: {channel.city}</p>
-                                                <p>Region: {channel.region}</p>
-                                                <p>Country: {channel.country}</p>
-                                            </div>
+                                            <ChannelCard channel={channel} key={channelIndex} />
                                         ))}
                                 </div>
                             </div>
                         )}
+
+                        {((reviews.length !== 0) && (channels.length !== 0)) && (
+                            <div>
+                                <h2>Your Reviews</h2>
+                                <hr/>
+                                <div className="d-flex flex-wrap">
+                                    {reviews
+                                        .filter((review) => review.user_id === account._id)
+                                        .map((review, reviewIndex) => (
+                                            <ReviewCard review={review}
+                                                        channels = {channels}
+                                                        users = {[account]}
+                                                        key={reviewIndex} />
+                                        ))}
+                                </div>
+                            </div>
+                        )
+                        }
 
                     </div>
                 ) : (
