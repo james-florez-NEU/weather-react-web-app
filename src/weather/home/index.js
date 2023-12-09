@@ -12,6 +12,7 @@ function Home () {
     const [favoriteChannels, setFavoriteChannels] = useState([]);
     const [channels, setChannels] = useState([]);
     const [newestReviews, setNewestReviews] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const majorCities = [2801268, 2593241, 2618724, 4059793, 803267, 3332210, 136022];
 
     const fetchAccount = async () => {
@@ -55,12 +56,22 @@ function Home () {
             console.log(err);
         }
     }
+    
+    const fetchReviews = async () => {
+        try {
+            const foundReviews = await client.getAllReviews();
+            setReviews(foundReviews);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
         fetchAccount();
         fetchUsers();
         fetchChannels();
         fetchNewestReviews();
+        fetchReviews();
     }, []);
 
     return (
@@ -96,6 +107,24 @@ function Home () {
                 </div>
             )}
 
+            {((reviews.length !== 0) && channels && account) && (
+                <div>
+                    <h2>Your Reviews</h2>
+                    <hr/>
+                    <div className="d-flex flex-wrap">
+                        {reviews
+                            .filter((review) => review.user_id === account._id)
+                            .map((review, reviewIndex) => (
+                                <ReviewCard review={review}
+                                            channels = {channels}
+                                            users = {[account]}
+                                            key={reviewIndex} />
+                        ))}
+                    </div>
+                </div>
+            )
+            }
+
             <h2>Major Cities</h2>
             <hr/>
                 <div className="d-flex flex-wrap">
@@ -108,7 +137,6 @@ function Home () {
 
             {channels && (
                 <div>
-                    <hr/>
                     <h2>Popular Weather Channels</h2>
                     <hr/>
                     <div className="d-flex flex-wrap">
@@ -121,7 +149,6 @@ function Home () {
 
             {newestReviews && (
                 <div>
-                    <hr/>
                     <h2>Newest Reviews</h2>
                     <hr/>
                     <div className="d-flex flex-wrap">
