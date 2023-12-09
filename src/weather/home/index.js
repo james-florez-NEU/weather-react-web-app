@@ -8,6 +8,7 @@ function Home () {
     const [favorites, setFavorites] = useState([]);
     const [favoriteChannels, setFavoriteChannels] = useState([]);
     const [channels, setChannels] = useState([]);
+    const [newestReviews, setNewestReviews] = useState([]);
     const majorCities = [2801268, 2593241, 2618724, 4059793, 803267, 3332210, 136022];
 
     const fetchAccount = async () => {
@@ -34,9 +35,19 @@ function Home () {
         }
     }
 
+    const fetchNewestReviews = async () => {
+        try {
+            const foundReviews = await client.getNewestReviews();
+            setNewestReviews(foundReviews);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         fetchAccount();
         fetchChannels();
+        fetchNewestReviews();
     }, []);
 
     return (
@@ -87,24 +98,44 @@ function Home () {
                         id={city} />
                 ))}
             </div>
-            <hr/>
-            <h2>Popular Weather Channels</h2>
-            <hr/>
+
             {channels && (
-                <div className="list-group">
-                    {channels.map((channel, channelIndex) => (
-                        <div className="list-group-item" key={channelIndex}>
-                            <h3>{channel.name}</h3>
-                            <p>Description: {channel.description}</p>
-                            <p>City: {channel.city}</p>
-                            <p>Region: {channel.region}</p>
-                            <p>Country: {channel.country}</p>
-                        </div>
-                    ))}
+                <div>
+                    <hr/>
+                    <h2>Popular Weather Channels</h2>
+                    <hr/>
+                    <div className="list-group">
+                        {channels.map((channel, channelIndex) => (
+                            <div className="list-group-item" key={channelIndex}>
+                                <h3>{channel.name}</h3>
+                                <p>Description: {channel.description}</p>
+                                <p>City: {channel.city}</p>
+                                <p>Region: {channel.region}</p>
+                                <p>Country: {channel.country}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
 
-
+            {newestReviews && (
+                <div>
+                    <hr/>
+                    <h2>Newest Reviews</h2>
+                    <hr/>
+                    <div className="list-group">
+                        {newestReviews.map((review, reviewIndex) => (
+                            <div className="list-group-item" key={reviewIndex}>
+                                <p>Weather Channel: {review.channel_id}</p>
+                                <p>Rating: {review.rating}</p>
+                                <p>Review: {review.message}</p>
+                                <p>Date: {review.date}</p>
+                                <p>By: {review.user_id}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
         </div>
     )

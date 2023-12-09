@@ -3,6 +3,7 @@ export const BASE_API = process.env.REACT_APP_API_BASE;
 export const USERS_API = `${BASE_API}/users`;
 export const WEATHER_API = `${BASE_API}/weather`;
 export const CHANNELS_API = `${BASE_API}/channels`;
+export const REVIEWS_API = `${BASE_API}/reviews`;
 
 const request = axios.create({
     withCredentials: true,
@@ -61,5 +62,19 @@ export const searchLocations = async (key) => {
 // Channel Functions
 export const getChannels = async () => {
     const response = await request.get(`${CHANNELS_API}`);
+    return response.data;
+}
+
+// Review Functions
+export const getAllReviews = async () => {
+    const response = await request.get(`${REVIEWS_API}`);
+    return response.data;
+}
+export const createReview = async (review) => {
+    const response = await request.post(`${REVIEWS_API}`, review);
+    return response.data;
+}
+export const getNewestReviews = async () => {
+    const response = await request.get(`${REVIEWS_API}/newest`);
     return response.data;
 }
