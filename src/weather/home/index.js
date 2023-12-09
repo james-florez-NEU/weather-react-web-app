@@ -70,7 +70,7 @@ function Home () {
                 <div>
                     <h2>Your Favorite Cities</h2>
                     <hr/>
-                    <div className="list-group">
+                    <div className="d-flex flex-wrap">
                         {favorites.map((favorite, favoriteIndex) => (
                             <WeatherCard
                                 key={favoriteIndex}
@@ -105,7 +105,6 @@ function Home () {
                 <div className="d-flex flex-wrap">
                     {majorCities.map((city, cityIndex) => (
                         <WeatherCard
-                            className="col-12 col-md-6 col-lg-4 col-xl-3 mb-3"
                             key={cityIndex}
                             id={city} />
                     ))}
