@@ -11,6 +11,7 @@ import Search from "./weather/search";
 import Results from "./weather/results";
 import WeatherDetails from "./weather/details/weatherDetails";
 import Review from "./weather/reviews/review";
+import Channel from "./weather/channels/channel";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                   <Route path="/search"             element={<Search />} />
                   <Route path="/results/:search"    element={<Results />} />
                   <Route path="/reviews/:id"        element={<Review />}/>
+                  <Route path="/channels/:id"       element={<Channel/>}/>
               </Routes>
             </div>
         </div>
