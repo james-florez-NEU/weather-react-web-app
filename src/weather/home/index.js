@@ -2,6 +2,7 @@ import "./index.css";
 import WeatherCard from "../card/weatherCard";
 import {useEffect, useState} from "react";
 import * as client from "../client/client";
+import ChannelCard from "../card/channelCard";
 
 function Home () {
     const [account, setAccount] = useState(null);
@@ -115,15 +116,9 @@ function Home () {
                     <hr/>
                     <h2>Popular Weather Channels</h2>
                     <hr/>
-                    <div className="list-group">
+                    <div className="d-flex flex-wrap">
                         {channels.map((channel, channelIndex) => (
-                            <div className="list-group-item" key={channelIndex}>
-                                <h3>{channel.name}</h3>
-                                <p>Description: {channel.description}</p>
-                                <p>City: {channel.city}</p>
-                                <p>Region: {channel.region}</p>
-                                <p>Country: {channel.country}</p>
-                            </div>
+                            <ChannelCard channel={channel} key={channelIndex} />
                         ))}
                     </div>
                 </div>
