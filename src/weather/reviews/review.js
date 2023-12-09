@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import * as client from "../client/client";
 import {useParams} from "react-router-dom";
+import * as client from "../client/client";
+import ReviewCard from "../card/reviewCard";
 
 const Review = () => {
     const [review, setReview] = useState(null);
