@@ -11,7 +11,6 @@ const ReviewCard = ({ review, channels, users }) => {
                     <p>Review: {review.message}</p>
                     <p>Date: {review.date}</p>
                     <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
-
                 </div>
             </div>
         </Link>
