@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import * as client from "../client/client";
 import {useParams} from "react-router-dom";
 
-const Review = ({ review, channels, users }) => {
+const Review = () => {
     const [review, setReview] = useState(null);
     const [channels, setChannels] = useState([]);
     const [users, setUsers] = useState([]);
