@@ -102,12 +102,13 @@ function Home () {
 
             <h2>Major Cities</h2>
             <hr/>
-            <div className="list-group">
-                {majorCities.map((city, cityIndex) => (
-                    <WeatherCard
-                        key={cityIndex}
-                        id={city} />
-                ))}
+                <div className="d-flex flex-wrap">
+                    {majorCities.map((city, cityIndex) => (
+                        <WeatherCard
+                            className="col-12 col-md-6 col-lg-4 col-xl-3 mb-3"
+                            key={cityIndex}
+                            id={city} />
+                    ))}
             </div>
 
             {channels && (
