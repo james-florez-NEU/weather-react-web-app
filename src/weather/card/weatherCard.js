@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import * as client from "../client/client";
 
 const WeatherCard = ({id}) => {
     const [weatherData, setWeatherData] = useState(null);
+    const navigate = useNavigate();
 
     const fetchWeatherData = async () => {
         try {
@@ -11,6 +12,20 @@ const WeatherCard = ({id}) => {
             setWeatherData(weather);
         } catch (error) {
             console.error('Error fetching weather data:', error);
+        }
+    };
+    const addFavoriteLocation = async () => {
+        try {
+            const foundAccount = await client.account();
+            await client.addFavoriteLocation(foundAccount._id, id);
+            navigate("../profile");
+        } catch (err) {
+            if (err.response.status === 403) {
+                console.log("Not logged in");
+                navigate("../login");
+            } else {
+                console.log(err);
+            }
         }
     };
 
@@ -29,6 +44,10 @@ const WeatherCard = ({id}) => {
                             <p className="card-text">Temperature: {weatherData.current.temp_f}°F</p>
                             <p className="card-text">Condition: {weatherData.current.condition.text}</p>
                         </div>
+                        <button className="btn btn-secondary"
+                                onClick={addFavoriteLocation}>
+                            Favorite Location
+                        </button>
                     </div>
                 </Link>
             ) : (

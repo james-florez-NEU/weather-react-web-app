@@ -48,6 +48,11 @@ export const signout = async () => {
     const response = await request.post(`${USERS_API}/signout`);
     return response.data;
 };
+export const addFavoriteLocation = async (userId, locationId) => {
+    console.log(userId, locationId);
+    const response = await request.post(`${USERS_API}/favorites/${userId}`, {locationId: locationId});
+    return response.data;
+}
 
 // Weather Functions
 export const getWeather = async (id) => {

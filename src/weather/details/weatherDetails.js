@@ -39,7 +39,6 @@ const WeatherDetails = () => {
         try {
             const foundChannels = await client.getAllChannels();
             setChannels(foundChannels);
-            console.log(foundChannels);
         } catch (err) {
             console.log(err);
         }
