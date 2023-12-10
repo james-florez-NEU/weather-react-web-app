@@ -133,7 +133,7 @@ function Profile() {
                             Signout
                         </button>
 
-                        {(favorites.length !== 0) && (
+                        {(favorites && favorites.length !== 0) && (
                             <div>
                                 <h2>Your Favorite Cities</h2>
                                 <hr/>
@@ -147,7 +147,7 @@ function Profile() {
                             </div>
                         )}
 
-                        {((favoriteChannels.length !== 0) && (channels.length !== 0)) && (
+                        {((favoriteChannels && favoriteChannels.length !== 0) && (channels && channels.length !== 0)) && (
                             <div>
                                 <h2>Your Favorite Weather Channels</h2>
                                 <hr/>
@@ -161,7 +161,7 @@ function Profile() {
                             </div>
                         )}
 
-                        {((reviews.length !== 0) && (channels.length !== 0)) && (
+                        {((reviews && reviews.length !== 0) && (channels && channels.length !== 0)) && (
                             <div>
                                 <h2>Your Reviews</h2>
                                 <hr/>
@@ -187,7 +187,7 @@ function Profile() {
                         <p>Role: {account.role}</p>
 
 
-                        {((reviews.length !== 0) && (channels.length !== 0)) && (
+                        {((reviews && reviews.length !== 0) && (channels && channels.length !== 0)) && (
                             <div>
                                 <h2>User's Reviews</h2>
                                 <hr/>
