@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import * as client from "../client/client";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import ChannelCard from "../card/channelCard";
 import ReviewCard from "../card/reviewCard";
 
@@ -9,7 +9,8 @@ const WeatherDetails = () => {
     const [users, setUsers] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [channels, setChannels] = useState([]);
-    const {id} = useParams();
+    const {id} = useParams();   // id of location to get weather for
+    const navigate = useNavigate();
 
     const fetchWeatherData = async () => {
         try {
@@ -43,6 +44,20 @@ const WeatherDetails = () => {
             console.log(err);
         }
     }
+    const addFavoriteLocation = async () => {
+        try {
+            const foundAccount = await client.account();
+            await client.addFavoriteLocation(foundAccount._id, id);
+            navigate("../profile");
+        } catch (err) {
+            if (err.response.status === 403) {
+                console.log("Not logged in");
+                navigate("../login");
+            } else {
+                console.log(err);
+            }
+        }
+    };
 
     useEffect(() => {
         fetchWeatherData();
@@ -56,7 +71,7 @@ const WeatherDetails = () => {
             <h2>Detailed Weather Report</h2>
             {weatherData && (
                 <div className="card">
-                    <img src={weatherData.current.condition.icon} alt="Weather Icon" className="float-end" />
+                    <img src={weatherData.current.condition.icon} alt="Weather Icon" className="float-end"/>
                     <h3 className="card-title">{weatherData.location.name}</h3>
                     <p className="card-text">Temperature: {weatherData.current.temp_f}°F</p>
                     <p className="card-text">Condition: {weatherData.current.condition.text}</p>
@@ -73,12 +88,16 @@ const WeatherDetails = () => {
                         <li className={"list-group-item"}>Wind Direction: {weatherData.current.wind_dir}</li>
                         <li className={"list-group-item"}>Wind Degree: {weatherData.current.wind_degree}°</li>
                     </ul>
+                    <button className="btn btn-secondary"
+                            onClick={addFavoriteLocation}>
+                        Add Favorite Location
+                    </button>
                 </div>
             )}
             <h3>Weather Channels for this Location</h3>
             {(channels.length !== 0) ? (
                 <div className="d-flex flex-wrap">
-                    {channels
+                {channels
                         .filter((channel) => channel.location_id == id)
                         .map((channel, channelIndex) => (
                             <Link to={`../channels/${channel._id}`}>
