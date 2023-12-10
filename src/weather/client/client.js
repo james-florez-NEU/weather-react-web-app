@@ -86,3 +86,11 @@ export const findReviewById = async (id) => {
     const response = await request.get(`${REVIEWS_API}/${id}`);
     return response.data;
 }
+export const deleteReview = async (id) => {
+    const response = await request.delete(`${REVIEWS_API}/${id}`);
+    return response.data;
+}
+export const approveReview = async (id) => {
+    const response = await request.put(`${REVIEWS_API}/approve/${id}`);
+    return response.data;
+}

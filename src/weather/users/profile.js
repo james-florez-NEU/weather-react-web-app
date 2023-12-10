@@ -13,6 +13,7 @@ function Profile() {
     const [favoriteChannels, setFavoriteChannels] = useState([]);
     const [channels, setChannels] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
     const fetchAccount = async () => {
@@ -50,6 +51,14 @@ function Profile() {
         const user = await client.findUserById(id);
         setAccount(user);
     };
+    const fetchUsers = async () => {
+        try {
+            const foundUsers = await client.findAllUsers();
+            setUsers(foundUsers);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const save = async () => {
         await client.updateUser(account);
     };
@@ -57,10 +66,16 @@ function Profile() {
         await client.signout();
         navigate("/login");
     };
+    const deleteReview = async (reviewId) => {
+        await client.deleteReview(reviewId);
+    };
+
+
     useEffect(() => {
         fetchAccount();
         fetchChannels();
         fetchReviews();
+        fetchUsers();
         if (loggedIn) {
             if (id !== account._id) {
                 findUserById(id);
@@ -161,7 +176,7 @@ function Profile() {
                             </div>
                         )}
 
-                        {((reviews && reviews.length !== 0) && (channels && channels.length !== 0)) && (
+                        {((account.role === "USER") && (reviews && reviews.length !== 0) && (channels && channels.length !== 0)) && (
                             <div>
                                 <h2>Your Reviews</h2>
                                 <hr/>
@@ -176,8 +191,34 @@ function Profile() {
                                         ))}
                                 </div>
                             </div>
-                        )
-                        }
+                        )}
+
+                        {((account.role === "MODERATOR") && (reviews && reviews.length !== 0) && (channels && channels.length !== 0)) && (
+                            <div>
+                                <h2>Reviews Flagged for Moderation</h2>
+                                <hr/>
+                                <div className="d-flex flex-wrap">
+                                    {reviews
+                                        .filter((review) => review.flaggedForModeration === true)
+                                        .map((review, reviewIndex) => (
+                                            <div className="card">
+                                                <ReviewCard review={review}
+                                                        channels = {channels}
+                                                        users = {users}
+                                                        key={reviewIndex} />
+                                                <button className="btn btn-success"
+                                                        onClick={() => approveReview(review._id)}>
+                                                    Approve Review
+                                                </button>
+                                                <button className="btn btn-danger"
+                                                        onClick={() => deleteReview(review._id)}>
+                                                    Delete Review
+                                                </button>
+                                            </div>
+                                        ))}
+                                </div>
+                            </div>
+                        )}
 
                     </div>
                 ) : (
