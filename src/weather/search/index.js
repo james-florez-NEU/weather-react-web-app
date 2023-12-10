@@ -8,9 +8,11 @@ const Search = () => {
         navigate(`/results/${search}`);
     }
     return (
-        <div>
+        <div className="m-3">
             <h1>Search</h1>
-            <label for={"search"}>Find current weather conditions by city name, US zip code, UK postcode, or Canadian postal code.</label>
+            <label for={"search"} className="m-1">
+                Find current weather conditions by city name, US zip code, UK postcode, or Canadian postal code.
+            </label>
             <br/>
             <input
                 id = "search"
@@ -19,7 +21,10 @@ const Search = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            <button onClick={executeSearch}>Search</button>
+            <br/>
+            <button onClick={executeSearch} className="btn btn-primary mt-2">
+                Search
+            </button>
         </div>
     );
 }

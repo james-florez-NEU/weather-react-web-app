@@ -75,7 +75,7 @@ function Home () {
     }, []);
 
     return (
-        <div className="main-content">
+        <div className="m-3">
             <h1>Home</h1>
             <hr/>
 
