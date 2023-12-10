@@ -79,7 +79,7 @@ function Home () {
             <h1>Home</h1>
             <hr/>
 
-            {(favorites.length !== 0) && (
+            {(favorites && favorites.length !== 0) && (
                 <div>
                     <h2>Your Favorite Cities</h2>
                     <hr/>
@@ -93,7 +93,7 @@ function Home () {
                 </div>
             )}
 
-            {((favoriteChannels.length !== 0) && (channels.length !== 0)) && (
+            {((favoriteChannels && favoriteChannels.length !== 0) && (channels && channels.length !== 0)) && (
                 <div>
                     <h2>Your Favorite Weather Channels</h2>
                     <hr/>
@@ -107,7 +107,7 @@ function Home () {
                 </div>
             )}
 
-            {((reviews.length !== 0) && (channels.length !== 0) && account) && (
+            {((reviews && reviews.length !== 0) && (channels && channels.length !== 0) && account) && (
                 <div>
                     <h2>Your Reviews</h2>
                     <hr/>
