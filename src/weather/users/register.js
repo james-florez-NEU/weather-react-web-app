@@ -13,7 +13,7 @@ function Register() {
         favorites: [],
         favoriteChannels: [],
         paymentAddress: "",
-        channelAffiliation: [],
+        channelAffiliations: [],
     });
     const navigate = useNavigate();
     const signup = async () => {

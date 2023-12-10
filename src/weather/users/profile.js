@@ -140,6 +140,16 @@ function Profile() {
                             <option value="FORECASTER">Weather Forecaster</option>
                         </select>
                         <br/>
+                        {(account.role === "MODERATOR") && (
+                            <div>
+                                <label htmlFor={"paymentAddress"}>Payment Address: </label>
+                                <input value={account.paymentAddress}
+                                        id={"paymentAddress"}
+                                        className="form-control"
+                                        onChange={(e) => setAccount({ ...account,
+                                             paymentAddress: e.target.value })}/>
+                            </div>
+                        )}
                         <button onClick={save} className="btn btn-success">
                             Save
                         </button>
