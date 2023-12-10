@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import * as client from "../client/client";
 import WeatherCard from "../card/weatherCard";
+import ReviewCard from "../card/reviewCard";
 
 const Channel = () => {
     const [channel, setChannel] = useState(null);
-    // const [weatherData, setWeatherData] = useState(null);
+    const [users, setUsers] = useState([]);
     const [reviews, setReviews] = useState([]);
     const { id } = useParams();
 
@@ -15,8 +16,6 @@ const Channel = () => {
             const foundChannel = await client.findChannelById(id);
             setChannel(foundChannel);
             console.log(foundChannel.location_id);
-            // const weather = await client.getWeather(foundChannel.location_id);
-            // setWeatherData(weather);
         } catch (err) {
             console.log(err);
         }
@@ -29,10 +28,19 @@ const Channel = () => {
             console.log(err);
         }
     }
+    const fetchUsers = async () => {
+        try {
+            const foundUsers = await client.findAllUsers();
+            setUsers(foundUsers);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
         fetchChannelById();
         fetchReviews();
+        fetchUsers();
     }, [id]);
     
     return (
@@ -64,9 +72,21 @@ const Channel = () => {
             
             <h2>Reviews of this Channel</h2>
             <hr/>
+            {reviews ? (
+                <div className="d-flex flex-wrap">
+                    {reviews
+                        .filter((review) => review.channel_id === id)
+                        .map((review, reviewIndex) => (
+                            <ReviewCard review={review}
+                                        channels={[channel]}
+                                        users={users}
+                                        key={reviewIndex}/>
+                        ))}
+                </div>
+            ) : (
+                <p>Loading Reviews...</p>
+            )}
 
-
-            
 
         </div>
     )
