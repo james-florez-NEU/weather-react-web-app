@@ -28,6 +28,10 @@ const CreateReview = () => {
     const fetchAccount = async () => {
         try {
             const foundAccount = await client.account();
+            if (foundAccount.role !== "user") {
+                console.log("Only users are allowed to create reviews");
+                navigate("../login");
+            }
             setReview(prevReview => ({ ...prevReview, user_id: foundAccount._id }));
         } catch (err) {
             if (err.response.status === 403) {
