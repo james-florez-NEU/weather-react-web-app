@@ -207,9 +207,8 @@ function Profile() {
                 )
             ) : (
                <div>
-                   <p>Please Log In</p>
                    <Link to="/login">
-                       <button>Go to Login Page</button>
+                       <button className="btn btn-primary">Go to Login Page</button>
                    </Link>
                </div>
             )}
