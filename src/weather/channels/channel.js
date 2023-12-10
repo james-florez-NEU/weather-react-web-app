@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams, Link} from "react-router-dom";
+import {useParams, Link, useNavigate} from "react-router-dom";
 import * as client from "../client/client";
 import WeatherCard from "../card/weatherCard";
 import ReviewCard from "../card/reviewCard";
@@ -9,7 +9,8 @@ const Channel = () => {
     const [users, setUsers] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [account, setAccount] = useState(null);
-    const { id } = useParams();
+    const { id } = useParams(); // id of channel to get details for
+    const navigate = useNavigate();
 
     const fetchChannelById = async () => {
         try {
@@ -42,6 +43,20 @@ const Channel = () => {
         } catch (err) {
             if (err.response.status === 403) {
                 console.log("Not logged in");
+            } else {
+                console.log(err);
+            }
+        }
+    };
+    const addFavoriteChannel = async () => {
+        try {
+            const foundAccount = await client.account();
+            await client.addFavoriteChannel(foundAccount._id, id);
+            navigate("../profile");
+        } catch (err) {
+            if (err.response.status === 403) {
+                console.log("Not logged in");
+                navigate("../login");
             } else {
                 console.log(err);
             }
@@ -114,10 +129,14 @@ const Channel = () => {
                             <h3>{channel.name}</h3>
                             <p>Description: {channel.description}</p>
                             <p>City: {channel.city}</p>
-                                <p>Region: {channel.region}</p>
-                                <p>Country: {channel.country}</p>
-                            </div>
+                            <p>Region: {channel.region}</p>
+                            <p>Country: {channel.country}</p>
                         </div>
+                        <button className="btn btn-secondary"
+                                onClick={addFavoriteChannel}>
+                            Add Favorite Channel
+                        </button>
+                    </div>
                 )
             ) : (
                 <p>Loading Channel...</p>

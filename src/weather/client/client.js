@@ -49,8 +49,11 @@ export const signout = async () => {
     return response.data;
 };
 export const addFavoriteLocation = async (userId, locationId) => {
-    console.log(userId, locationId);
     const response = await request.post(`${USERS_API}/favorites/${userId}`, {locationId: locationId});
+    return response.data;
+}
+export const addFavoriteChannel = async (userId, channelId) => {
+    const response = await request.post(`${USERS_API}/favoriteChannels/${userId}`, {channelId: channelId});
     return response.data;
 }
 
