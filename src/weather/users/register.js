@@ -4,7 +4,7 @@ import * as client from "../client/client";
 function Register() {
     const [error, setError] = useState("");
     const [credentials, setCredentials] = useState({
-        username: "", password: "", role: "USER" });
+        username: "", password: "", role: "USER" , favorites: [], favoriteChannels: []});
     const navigate = useNavigate();
     const signup = async () => {
         try {
