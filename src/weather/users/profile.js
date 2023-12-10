@@ -68,9 +68,11 @@ function Profile() {
     };
     const deleteReview = async (reviewId) => {
         await client.deleteReview(reviewId);
+        await fetchReviews();
     };
     const approveReview = async (reviewId) => {
         await client.approveReview(reviewId);
+        await fetchReviews();
     };
 
 
