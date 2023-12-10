@@ -120,12 +120,6 @@ function Profile() {
                                onChange={(e) => setAccount({ ...account,
                                    lastName: e.target.value })}/>
                         <br/>
-                        <label htmlFor={"dob"}>Date of Birth: </label>
-                        <input value={account.dob}
-                               id={"dob"}
-                               onChange={(e) => setAccount({ ...account,
-                                   dob: e.target.value })}/>
-                        <br/>
                         <label htmlFor={"email"}>Email: </label>
                         <input value={account.email}
                                id={"email"}

@@ -4,7 +4,17 @@ import * as client from "../client/client";
 function Register() {
     const [error, setError] = useState("");
     const [credentials, setCredentials] = useState({
-        username: "", password: "", role: "USER" , favorites: [], favoriteChannels: []});
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        role: "USER",
+        favorites: [],
+        favoriteChannels: [],
+        paymentAddress: "",
+        channelAffiliation: [],
+    });
     const navigate = useNavigate();
     const signup = async () => {
         try {
