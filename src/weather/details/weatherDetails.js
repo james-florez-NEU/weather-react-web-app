@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import * as client from "../client/client";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import ChannelCard from "../card/channelCard";
+import ReviewCard from "../card/reviewCard";
 
 const WeatherDetails = () => {
     const [weatherData, setWeatherData] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [reviews, setReviews] = useState([]);
+    const [channels, setChannels] = useState([]);
     const {id} = useParams();
 
     const fetchWeatherData = async () => {
@@ -14,14 +19,42 @@ const WeatherDetails = () => {
             console.error('Error fetching weather data:', error);
         }
     };
+    const fetchReviews = async () => {
+        try {
+            const foundReviews = await client.getAllReviews();
+            setReviews(foundReviews);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    const fetchUsers = async () => {
+        try {
+            const foundUsers = await client.findAllUsers();
+            setUsers(foundUsers);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    const fetchChannels = async () => {
+        try {
+            const foundChannels = await client.getAllChannels();
+            setChannels(foundChannels);
+            console.log(foundChannels);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
         fetchWeatherData();
+        fetchReviews();
+        fetchUsers();
+        fetchChannels();
     }, [id]);
 
     return (
         <div className="ms-2">
-            <h2>Weather Details</h2>
+            <h2>Detailed Weather Report</h2>
             {weatherData && (
                 <div className="card">
                     <img src={weatherData.current.condition.icon} alt="Weather Icon" className="float-end" />
@@ -43,6 +76,57 @@ const WeatherDetails = () => {
                     </ul>
                 </div>
             )}
+            <h3>Weather Channels for this Location</h3>
+            {(channels.length !== 0) && (
+                <div className="d-flex flex-wrap">
+                    <div>
+                        <p>Test</p>
+                        <p>{channels.length}</p>
+                        <br/>
+                        <p>{channels[0].location_id}</p>
+                        <br/>
+                        <p>{channels[1].location_id}</p>
+                        <br/>
+                        <p>{channels[2].location_id}</p>
+                        <br/>
+                        <p>{id}</p>
+                        <br/>
+                        <p>
+                            {channels.filter((channel) => channel.location_id === id).length}
+                        </p>
+                    </div>
+
+
+                    {channels
+                        .filter((channel) => channel.location_id == id)
+                        .map((channel, channelIndex) => (
+                            <Link to={`../channels/${channel._id}`}>
+                                <ChannelCard channel={channel} key={channelIndex}/>
+                            </Link>
+                        ))}
+                </div>
+            )}
+            {/*// ) : (*/}
+            {/*//     <p>Loading Weather Channels...</p>*/}
+            {/*// )}*/}
+
+            {/*<h3>Reviews of Weather Channels for this Location</h3>*/}
+            {/*<hr/>*/}
+            {/*{reviews ? (*/}
+            {/*    <div className="d-flex flex-wrap">*/}
+            {/*        {reviews*/}
+            {/*            .filter((review) => review.location_id === id)*/}
+            {/*            .map((review, reviewIndex) => (*/}
+            {/*                <ReviewCard review={review}*/}
+            {/*                            channels={channels}*/}
+            {/*                            users={users}*/}
+            {/*                            key={reviewIndex}/>*/}
+            {/*            ))}*/}
+            {/*    </div>*/}
+            {/*) : (*/}
+            {/*    <p>Loading Reviews...</p>*/}
+            {/*)}*/}
+
         </div>
     );
 };
