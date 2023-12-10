@@ -32,6 +32,14 @@ const Review = () => {
             console.log(err);
         }
     }
+    const flagReview = async () => {
+        try {
+            await client.flagReview(id);
+            await fetchSingleReview();
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
         fetchUsers();
@@ -62,6 +70,7 @@ const Review = () => {
                             </div>
                         )}
                     </div>
+                    <button className="btn btn-danger" onClick={flagReview}>Flag for Moderation</button>
                 </div>
             ) : (
                 <p>Loading review data...</p>

@@ -94,3 +94,7 @@ export const approveReview = async (id) => {
     const response = await request.put(`${REVIEWS_API}/approve/${id}`);
     return response.data;
 }
+export const flagReview = async (id) => {
+    const response = await request.put(`${REVIEWS_API}/flag/${id}`);
+    return response.data;
+}
