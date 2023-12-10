@@ -28,7 +28,7 @@ const CreateReview = () => {
     const fetchAccount = async () => {
         try {
             const foundAccount = await client.account();
-            if (foundAccount.role !== "user") {
+            if (foundAccount.role !== "USER") {
                 console.log("Only users are allowed to create reviews");
                 navigate("../login");
             }
