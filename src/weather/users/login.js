@@ -9,11 +9,15 @@ function Login() {
         navigate("/profile");
     };
     return (
-        <div>
-            <h1>Login</h1>
+        <div className="m-3">
+            <h1>Login to your Profile</h1>
+            <label for="username" className="m-1">Username:</label>
             <input value={credentials.username} onChange={(e) => setCredentials({...credentials, username: e.target.value})}/>
+            <br/>
+            <label for="password" className="m-1">Password:</label>
             <input value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})}/>
-            <button onClick={signin}> Signin </button>
+            <br/>
+            <button onClick={signin} className="btn btn-primary mt-2"> Login </button>
         </div>
     );
 }
