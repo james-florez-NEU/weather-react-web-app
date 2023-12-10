@@ -18,7 +18,7 @@ function Register() {
         <div className="m-3">
             <h1>Register</h1>
             {error && <div>{error}</div>}
-            <label for="username" className="m-1">Username:</label>
+            <label htmlFor="username" className="m-1">Username:</label>
             <input
                 id="username"
                 value={credentials.username}
@@ -26,7 +26,7 @@ function Register() {
                     ...credentials,
                     username: e.target.value })} />
             <br/>
-            <label for="password" className="m-1">Password:</label>
+            <label htmlFor="password" className="m-1">Password:</label>
             <input
                 id="password"
                 value={credentials.password}
@@ -34,7 +34,7 @@ function Register() {
                     ...credentials,
                     password: e.target.value })} />
             <br/>
-            <label for="role" className="m-1">Role:</label>
+            <label htmlFor="role" className="m-1">Role:</label>
             <select
                 id="role"
                 onChange={(e) => setCredentials({
