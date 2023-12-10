@@ -56,6 +56,10 @@ export const addFavoriteChannel = async (userId, channelId) => {
     const response = await request.post(`${USERS_API}/favoriteChannels/${userId}`, {channelId: channelId});
     return response.data;
 }
+export const addChannelAffiliation = async (userId, channelId) => {
+    const response = await request.post(`${USERS_API}/channelAffiliations/${userId}`, {channelId: channelId});
+    return response.data;
+}
 
 // Weather Functions
 export const getWeather = async (id) => {

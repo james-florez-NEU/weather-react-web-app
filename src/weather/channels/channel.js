@@ -62,6 +62,20 @@ const Channel = () => {
             }
         }
     };
+    const addChannelAffiliation = async () => {
+        try {
+            const foundAccount = await client.account();
+            await client.addChannelAffiliation(foundAccount._id, id);
+            navigate("../profile");
+        } catch (err) {
+            if (err.response.status === 403) {
+                console.log("Not logged in");
+                navigate("../login");
+            } else {
+                console.log(err);
+            }
+        }
+    }
 
     useEffect(() => {
         fetchChannelById();
@@ -121,6 +135,10 @@ const Channel = () => {
                         <button className="btn btn-primary"
                                 onClick={() => client.updateChannel(channel)}>
                             Update Channel
+                        </button>
+                        <button className="btn btn-secondary"
+                                onClick={addChannelAffiliation}>
+                            Affiliate with Channel as a Forecaster
                         </button>
                     </div>
                 ) : (
