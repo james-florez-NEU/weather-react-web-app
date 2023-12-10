@@ -77,26 +77,8 @@ const WeatherDetails = () => {
                 </div>
             )}
             <h3>Weather Channels for this Location</h3>
-            {(channels.length !== 0) && (
+            {(channels.length !== 0) ? (
                 <div className="d-flex flex-wrap">
-                    <div>
-                        <p>Test</p>
-                        <p>{channels.length}</p>
-                        <br/>
-                        <p>{channels[0].location_id}</p>
-                        <br/>
-                        <p>{channels[1].location_id}</p>
-                        <br/>
-                        <p>{channels[2].location_id}</p>
-                        <br/>
-                        <p>{id}</p>
-                        <br/>
-                        <p>
-                            {channels.filter((channel) => channel.location_id === id).length}
-                        </p>
-                    </div>
-
-
                     {channels
                         .filter((channel) => channel.location_id == id)
                         .map((channel, channelIndex) => (
@@ -105,10 +87,9 @@ const WeatherDetails = () => {
                             </Link>
                         ))}
                 </div>
+            ) : (
+                <p>Loading Weather Channels...</p>
             )}
-            {/*// ) : (*/}
-            {/*//     <p>Loading Weather Channels...</p>*/}
-            {/*// )}*/}
 
             {/*<h3>Reviews of Weather Channels for this Location</h3>*/}
             {/*<hr/>*/}
