@@ -46,14 +46,15 @@ const Review = () => {
             {review ? (
                 <div className="card">
                     <div className="card-body">
-                        <h3>Review of Weather
-                            Channel: {channels.find(channel => channel._id === review.channel_id)?.name || 'Channel Not Found'}</h3>
-                        <p>Rating: {review.rating}/10</p>
-                        <p>Review: {review.message}</p>
-                        <p>Date: {review.date}</p>
+                        <Link to={`../channels/${review.channel_id}`}>
+                            <p>Channel: {channels.find(channel => channel._id === review.channel_id)?.name || 'Channel Not Found'}</p>
+                        </Link>
                         <Link to={`../profile/${review.user_id}`}>
                             <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
                         </Link>
+                        <p>Rating: {review.rating}/10</p>
+                        <p>Review: {review.message}</p>
+                        <p>Date: {review.date}</p>
                         {review.flaggedForModeration && (
                             <div>
                                 <h3>ATTENTION:</h3>
