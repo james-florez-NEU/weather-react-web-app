@@ -92,6 +92,11 @@ const Channel = () => {
                                id="channel_country"
                                value={channel.country}
                                onChange={(e) => setChannel({...channel, country: e.target.value})}/>
+                        <br/>
+                        <button className="btn btn-primary"
+                                onClick={() => client.updateChannel(channel)}>
+                            Update Channel
+                        </button>
                     </div>
                 ) : (
                         <div className="card">

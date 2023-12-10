@@ -68,6 +68,10 @@ export const findChannelById = async (id) => {
     const response = await request.get(`${CHANNELS_API}/${id}`);
     return response.data;
 }
+export const updateChannel = async (channel) => {
+    const response = await request.put(`${CHANNELS_API}/${channel._id}`, channel);
+    return response.data;
+}
 
 // Review Functions
 export const getAllReviews = async () => {
