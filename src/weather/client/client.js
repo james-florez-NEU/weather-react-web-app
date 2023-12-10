@@ -75,7 +75,7 @@ export const getAllReviews = async () => {
     return response.data;
 }
 export const createReview = async (review) => {
-    const response = await request.post(`${REVIEWS_API}`, review);
+    const response = await request.post(`${REVIEWS_API}/create`, review);
     return response.data;
 }
 export const getNewestReviews = async () => {

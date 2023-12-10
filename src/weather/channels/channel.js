@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import * as client from "../client/client";
 import WeatherCard from "../card/weatherCard";
 import ReviewCard from "../card/reviewCard";
@@ -12,10 +12,8 @@ const Channel = () => {
 
     const fetchChannelById = async () => {
         try {
-            console.log(id);
             const foundChannel = await client.findChannelById(id);
             setChannel(foundChannel);
-            console.log(foundChannel.location_id);
         } catch (err) {
             console.log(err);
         }
@@ -72,8 +70,15 @@ const Channel = () => {
             
             <h2>Reviews of this Channel</h2>
             <hr/>
-            {((reviews.length !== 0) && (users.length !== 0)) ? (
+
+            {((reviews.length !== 0) && (users.length !== 0) && channel) ? (
                 <div className="d-flex flex-wrap">
+                    <Link to={`../reviews/create/${id}`}>
+                        <div className="card">
+                            <h2 className="card-title">Post a New Review</h2>
+                        </div>
+                    </Link>
+
                     {reviews
                         .filter((review) => review.channel_id === id)
                         .map((review, reviewIndex) => (
