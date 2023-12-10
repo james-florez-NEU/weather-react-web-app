@@ -148,7 +148,7 @@ function Home () {
 
             {newestReviews && (
                 <div>
-                    <h2>Newest Reviews</h2>
+                    <h2>3 Most Recent Reviews</h2>
                     <hr/>
                     <div className="d-flex flex-wrap">
                         {newestReviews.map((review, reviewIndex) => (
