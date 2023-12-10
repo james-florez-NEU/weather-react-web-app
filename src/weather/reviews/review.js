@@ -46,8 +46,8 @@ const Review = () => {
             {review ? (
                 <div className="card">
                     <div className="card-body">
-                        <p>Review of Weather
-                            Channel: {channels.find(channel => channel._id === review.channel_id)?.name || 'Channel Not Found'}</p>
+                        <h3>Review of Weather
+                            Channel: {channels.find(channel => channel._id === review.channel_id)?.name || 'Channel Not Found'}</h3>
                         <p>Rating: {review.rating}/10</p>
                         <p>Review: {review.message}</p>
                         <p>Date: {review.date}</p>
