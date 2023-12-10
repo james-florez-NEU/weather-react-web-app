@@ -72,7 +72,7 @@ const Channel = () => {
             
             <h2>Reviews of this Channel</h2>
             <hr/>
-            {reviews ? (
+            {((reviews.length !== 0) && (users.length !== 0)) ? (
                 <div className="d-flex flex-wrap">
                     {reviews
                         .filter((review) => review.channel_id === id)
