@@ -10,7 +10,9 @@ const ReviewCard = ({ review, channels, users }) => {
                     <p className="card-text">Rating: {review.rating}/10</p>
                     <p className="card-text">Review: {review.message}</p>
                     <p className="card-text">Date: {review.date}</p>
-                    <p className="card-text">By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
+                    <Link to={`../profile/${review.user_id}`}>
+                        <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
+                    </Link>
                 </div>
             </div>
         </Link>

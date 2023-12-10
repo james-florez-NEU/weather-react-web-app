@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import * as client from "../client/client";
 
 const Review = () => {
@@ -51,7 +51,9 @@ const Review = () => {
                         <p>Rating: {review.rating}/10</p>
                         <p>Review: {review.message}</p>
                         <p>Date: {review.date}</p>
-                        <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
+                        <Link to={`../profile/${review.user_id}`}>
+                            <p>By: {users.find(user => user._id === review.user_id)?.username || 'User Not Found'}</p>
+                        </Link>
                         {review.flaggedForModeration && (
                             <div>
                                 <h3>ATTENTION:</h3>
