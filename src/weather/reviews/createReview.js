@@ -5,6 +5,7 @@ import * as client from "../client/client";
 const CreateReview = () => {
     const {id} = useParams();   // id of channel to review
     const [channel, setChannel] = useState(null);
+    const [account, setAccount] = useState(null); // account of logged-in user
     const [review, setReview] = useState({
         user_id: "",
         channel_id: id,
@@ -20,7 +21,7 @@ const CreateReview = () => {
         try {
             const foundChannel = await client.findChannelById(id);
             setChannel(foundChannel);
-            setReview({...review, location_id: foundChannel.location_id});
+            setReview(prevReview => ({ ...prevReview, location_id: foundChannel.location_id }));
         } catch (err) {
             console.log(err);
         }
@@ -28,7 +29,10 @@ const CreateReview = () => {
     const fetchAccount = async () => {
         try {
             const foundAccount = await client.account();
-            setReview({...review, user_id: foundAccount._id});
+            console.log(foundAccount);
+            setAccount(foundAccount);
+            setReview(prevReview => ({ ...prevReview, user_id: foundAccount._id }));
+            console.log(review);
         } catch (err) {
             if (err.response.status === 403) {
                 console.log("Not logged in");
@@ -55,7 +59,7 @@ const CreateReview = () => {
 
     return (
         <div>
-            {channel && (
+            {(channel && account) && (
                 <div>
                     <h2>Create Review of "{channel.name}"</h2>
 
