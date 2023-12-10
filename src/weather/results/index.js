@@ -24,22 +24,22 @@ function Results() {
         <div>
             <h1>Results for search "{search}"</h1>
             {locations && (
-                <ul className="list-group flex-grow-2">
+                <div className="d-flex flex-wrap">
                     {
                         locations
                             .map((location, index) => (
                                 <Link to={`../details/${location.id}`}>
-                                    <li key={index} className="list-group-item">
-                                        <h3>{location.name}</h3>
-                                        <p>Region: {location.region}</p>
-                                        <p>Country: {location.country}</p>
-                                        <p>Latitude: {location.lat}</p>
-                                        <p>Longitude: {location.lon}</p>
-                                    </li>
+                                    <div key={index} className="card">
+                                        <h3 className="card-title">{location.name}</h3>
+                                        <p className="card-text">Region: {location.region}</p>
+                                        <p className="card-text">Country: {location.country}</p>
+                                        <p className="card-text">Latitude: {location.lat}</p>
+                                        <p className="card-text">Longitude: {location.lon}</p>
+                                    </div>
                                 </Link>
                             ))
                     }
-                </ul>
+                </div>
             )}
         </div>
     );
