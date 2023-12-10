@@ -69,6 +69,9 @@ function Profile() {
     const deleteReview = async (reviewId) => {
         await client.deleteReview(reviewId);
     };
+    const approveReview = async (reviewId) => {
+        await client.approveReview(reviewId);
+    };
 
 
     useEffect(() => {
