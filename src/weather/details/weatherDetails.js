@@ -91,22 +91,22 @@ const WeatherDetails = () => {
                 <p>Loading Weather Channels...</p>
             )}
 
-            {/*<h3>Reviews of Weather Channels for this Location</h3>*/}
-            {/*<hr/>*/}
-            {/*{reviews ? (*/}
-            {/*    <div className="d-flex flex-wrap">*/}
-            {/*        {reviews*/}
-            {/*            .filter((review) => review.location_id === id)*/}
-            {/*            .map((review, reviewIndex) => (*/}
-            {/*                <ReviewCard review={review}*/}
-            {/*                            channels={channels}*/}
-            {/*                            users={users}*/}
-            {/*                            key={reviewIndex}/>*/}
-            {/*            ))}*/}
-            {/*    </div>*/}
-            {/*) : (*/}
-            {/*    <p>Loading Reviews...</p>*/}
-            {/*)}*/}
+            <h3>Reviews of Weather Channels for this Location</h3>
+            <hr/>
+            {(reviews.length !== 0) ? (
+                <div className="d-flex flex-wrap">
+                    {reviews
+                        .filter((review) => review.location_id == id)
+                        .map((review, reviewIndex) => (
+                            <ReviewCard review={review}
+                                        channels={channels}
+                                        users={users}
+                                        key={reviewIndex}/>
+                        ))}
+                </div>
+            ) : (
+                <p>Loading Reviews...</p>
+            )}
 
         </div>
     );
