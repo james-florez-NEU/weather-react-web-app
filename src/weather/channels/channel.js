@@ -64,32 +64,42 @@ const Channel = () => {
                     <div>
                         <h3>Channel Details Available to Edit</h3>
                         <label htmlFor="channel_name">Channel Name</label>
-                        <input type="text"
+                        <input type="textarea"
                                id="channel_name"
+                               className="form-control"
+                               placeholder="Channel Name"
                                value={channel.name}
                                onChange={(e) => setChannel({...channel, name: e.target.value})}/>
                         <br/>
                         <label htmlFor="channel_description">Channel Description</label>
-                        <input type="text"
-                               id="channel_description"
-                               value={channel.description}
-                               onChange={(e) => setChannel({...channel, description: e.target.value})}/>
+                        <textarea rows="4"
+                                  className="form-control"
+                                  id="channel_description"
+                                  placeholder="Channel Description"
+                                  value={channel.description}
+                                  onChange={(e) => setChannel({...channel, description: e.target.value})}></textarea>
                         <br/>
                         <label htmlFor="channel_city">City</label>
                         <input type="text"
                                id="channel_city"
+                               className="form-control"
+                               placeholder="City"
                                value={channel.city}
                                onChange={(e) => setChannel({...channel, city: e.target.value})}/>
                         <br/>
                         <label htmlFor="channel_region">Region</label>
                         <input type="text"
                                id="channel_region"
+                               className="form-control"
+                               placeholder="Region"
                                value={channel.region}
                                onChange={(e) => setChannel({...channel, region: e.target.value})}/>
                         <br/>
                         <label htmlFor="channel_country">Country</label>
                         <input type="text"
                                id="channel_country"
+                               className="form-control"
+                               placeholder="Country"
                                value={channel.country}
                                onChange={(e) => setChannel({...channel, country: e.target.value})}/>
                         <br/>
@@ -99,11 +109,11 @@ const Channel = () => {
                         </button>
                     </div>
                 ) : (
-                        <div className="card">
-                            <div className="card-body">
-                                <h3>{channel.name}</h3>
-                                <p>Description: {channel.description}</p>
-                                <p>City: {channel.city}</p>
+                    <div className="card">
+                        <div className="card-body">
+                            <h3>{channel.name}</h3>
+                            <p>Description: {channel.description}</p>
+                            <p>City: {channel.city}</p>
                                 <p>Region: {channel.region}</p>
                                 <p>Country: {channel.country}</p>
                             </div>
