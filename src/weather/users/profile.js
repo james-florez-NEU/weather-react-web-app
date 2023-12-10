@@ -74,7 +74,7 @@ function Profile() {
     return (
         <div className="ms-3 w-50">
             <h1>Profile</h1>
-            {account && (
+            {account ? (
                 loggedIn ? (
                     <div className="p-3">
                         <label htmlFor={"username"}>Username: </label>
@@ -205,6 +205,13 @@ function Profile() {
                         )}
                     </div>
                 )
+            ) : (
+               <div>
+                   <p>Please Log In</p>
+                   <Link to="/login">
+                       <button>Go to Login Page</button>
+                   </Link>
+               </div>
             )}
         </div>
     );
