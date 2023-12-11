@@ -23,7 +23,7 @@ function App() {
               </div>
               <div className="d-flex">
                   <Navigation/>
-                  <div className="flex-fill">
+                  <div className="flex-fill main-content">
                       <Routes>
                           <Route path="/" element={<Navigate to="/home"/>}/>
                           <Route path="/home" element={<Home/>}/>

@@ -150,10 +150,10 @@ function Profile() {
                                              paymentAddress: e.target.value })}/>
                             </div>
                         )}
-                        <button onClick={save} className="btn btn-success">
+                        <button onClick={save} className="btn btn-primary">
                             Save
                         </button>
-                        <button onClick={signout} className="btn btn-danger">
+                        <button onClick={signout} className="btn btn-secondary">
                             Signout
                         </button>
 
