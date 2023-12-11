@@ -17,27 +17,34 @@ import CreateReview from "./weather/reviews/createReview";
 function App() {
   return (
       <HashRouter>
-        <div className="d-flex">
-            <Navigation />
-            <div className="flex-fill">
-              <Routes>
-                  <Route path="/"                   element={<Navigate to="/home"/>}/>
-                  <Route path="/home"               element={<Home/>}/>
-                  <Route path="/details/:id"        element={<WeatherDetails/>}/>
-                  <Route path="/login"              element={<Login />} />
-                  <Route path="/register"           element={<Register />} />
-                  <Route path="/profile"            element={<Profile />} />
-                  <Route path="/profile/:id"        element={<Profile />} />
-                  <Route path="/admin/users"        element={<UserTable />} />
-                  <Route path="/search"             element={<Search />} />
-                  <Route path="/results/:search"    element={<Results />} />
-                  <Route path="/reviews/:id"        element={<Review />}/>
-                  <Route path="/reviews/create/:id" element={<CreateReview />}/>
-                  <Route path="/channels/:id"       element={<Channel/>}/>
-              </Routes>
-            </div>
-        </div>
+          <div>
+              <div className="weather-header">
+                  Weather Central
+              </div>
+              <div className="d-flex">
+                  <Navigation/>
+                  <div className="flex-fill">
+                      <Routes>
+                          <Route path="/" element={<Navigate to="/home"/>}/>
+                          <Route path="/home" element={<Home/>}/>
+                          <Route path="/details/:id" element={<WeatherDetails/>}/>
+                          <Route path="/login" element={<Login/>}/>
+                          <Route path="/register" element={<Register/>}/>
+                          <Route path="/profile" element={<Profile/>}/>
+                          <Route path="/profile/:id" element={<Profile/>}/>
+                          <Route path="/admin/users" element={<UserTable/>}/>
+                          <Route path="/search" element={<Search/>}/>
+                          <Route path="/results/:search" element={<Results/>}/>
+                          <Route path="/reviews/:id" element={<Review/>}/>
+                          <Route path="/reviews/create/:id" element={<CreateReview/>}/>
+                          <Route path="/channels/:id" element={<Channel/>}/>
+                      </Routes>
+                  </div>
+              </div>
+          </div>
+
       </HashRouter>
   );
 }
+
 export default App;
