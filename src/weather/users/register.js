@@ -30,6 +30,7 @@ function Register() {
             {error && <div>{error}</div>}
             <label htmlFor="username" className="m-1">Username:</label>
             <input
+                className="form-control"
                 id="username"
                 value={credentials.username}
                 onChange={(e) => setCredentials({
@@ -38,6 +39,7 @@ function Register() {
             <br/>
             <label htmlFor="password" className="m-1">Password:</label>
             <input
+                className="form-control"
                 id="password"
                 value={credentials.password}
                 onChange={(e) => setCredentials({
@@ -46,6 +48,7 @@ function Register() {
             <br/>
             <label htmlFor="role" className="m-1">Role:</label>
             <select
+                className="form-control"
                 id="role"
                 onChange={(e) => setCredentials({
                     ...credentials,
