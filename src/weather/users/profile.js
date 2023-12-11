@@ -7,7 +7,7 @@ import ReviewCard from "../card/reviewCard";
 import "./index.css";
 
 function Profile() {
-    const { id } = useParams();
+    const { id } = useParams(); // id of user to display
     const [account, setAccount] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
     const [favorites, setFavorites] = useState([]);
@@ -232,6 +232,19 @@ function Profile() {
                                                     Delete Review
                                                 </button>
                                             </div>
+                                        ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {((account.role === "FORECASTER") && (channels && channels.length !== 0)) && (
+                            <div>
+                                <h2>Your Affiliated Weather Channels</h2>
+                                <hr/>
+                                <div className="d-flex flex-wrap">
+                                    {channels.filter((channel) => account.channelAffiliations.includes(channel._id))
+                                        .map((channel, channelIndex) => (
+                                            <ChannelCard channel={channel} key={channelIndex} />
                                         ))}
                                 </div>
                             </div>
