@@ -97,42 +97,46 @@ function Profile() {
             {account ? (
                 loggedIn ? (
                     <div className="p-3">
-                        <label htmlFor={"username"}>Username: </label>
+                        <label className="me-3 mb-2" htmlFor={"username"}>Username: </label>
                         {account.username}
                         <br/>
-                        <label htmlFor={"password"}>Password: </label>
+                        <label className="me-3 mb-2" htmlFor={"password"}>Password: </label>
                         <input
+                            className="form-control"
                             id="password"
                             value={account.password}
                             onChange={(e) => setAccount({ ...account,
                                 password: e.target.value })}/>
                         <br/>
-                        <label htmlFor={"firstName"}>First Name: </label>
+                        <label className="me-3 mb-2" htmlFor={"firstName"}>First Name: </label>
                         <input
+                            className="form-control"
                             id="firstName"
                             value={account.firstName}
                             onChange={(e) => setAccount({ ...account,
                                 firstName: e.target.value })}/>
                         <br/>
-                        <label htmlFor={"lastName"}>Last Name: </label>
+                        <label className="me-3 mb-2" htmlFor={"lastName"}>Last Name: </label>
                         <input value={account.lastName}
+                               className="form-control"
                                id={"lastName"}
                                onChange={(e) => setAccount({ ...account,
                                    lastName: e.target.value })}/>
                         <br/>
-                        <label htmlFor={"email"}>Email: </label>
+                        <label className="me-3 mb-2" htmlFor={"email"}>Email: </label>
                         <input value={account.email}
                                id={"email"}
-                               className="input-group-lg wd-50"
+                               className="form-control"
                                onChange={(e) => setAccount({ ...account,
                                    email: e.target.value })}/>
                         <br/>
-                        <label htmlFor={"currentRole"}>Current Role: </label>
+                        <label className="me-3 mb-2" htmlFor={"currentRole"}>Current Role: </label>
                         {account.role}
                         <br/>
-                        <label htmlFor={"role"}>New Role: </label>
+                        <label className="me-3 mb-2" htmlFor={"role"}>New Role: </label>
                         <select
                             id={"role"}
+                            className="form-control"
                             onChange={(e) => setAccount({ ...account,
                                 role: e.target.value })}>
                             <option value="USER">User</option>
@@ -142,7 +146,7 @@ function Profile() {
                         <br/>
                         {(account.role === "MODERATOR") && (
                             <div>
-                                <label htmlFor={"paymentAddress"}>Payment Address: </label>
+                                <label className="me-3 mb-2" htmlFor={"paymentAddress"}>Payment Address: </label>
                                 <input value={account.paymentAddress}
                                         id={"paymentAddress"}
                                         className="form-control"
@@ -150,12 +154,15 @@ function Profile() {
                                              paymentAddress: e.target.value })}/>
                             </div>
                         )}
-                        <button onClick={save} className="btn btn-primary">
-                            Save
-                        </button>
-                        <button onClick={signout} className="btn btn-secondary">
-                            Signout
-                        </button>
+                        <div className="mb-3">
+                            <button onClick={save} className="btn btn-primary me-3">
+                                Save
+                            </button>
+                            <button onClick={signout} className="btn btn-secondary">
+                                Signout
+                            </button>
+                        </div>
+
 
                         {(favorites && favorites.length !== 0) && (
                             <div>
