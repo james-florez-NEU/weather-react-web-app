@@ -4,6 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import WeatherCard from "../card/weatherCard";
 import ChannelCard from "../card/channelCard";
 import ReviewCard from "../card/reviewCard";
+import "./index.css";
 
 function Profile() {
     const { id } = useParams();
@@ -217,16 +218,16 @@ function Profile() {
                                     {reviews
                                         .filter((review) => review.flaggedForModeration === true)
                                         .map((review, reviewIndex) => (
-                                            <div className="card">
+                                            <div className="moderator-card">
                                                 <ReviewCard review={review}
                                                         channels = {channels}
                                                         users = {users}
                                                         key={reviewIndex} />
-                                                <button className="btn btn-success"
+                                                <button className="btn btn-primary ms-3"
                                                         onClick={() => approveReview(review._id)}>
                                                     Approve Review
                                                 </button>
-                                                <button className="btn btn-danger"
+                                                <button className="btn btn-danger ms-3"
                                                         onClick={() => deleteReview(review._id)}>
                                                     Delete Review
                                                 </button>
