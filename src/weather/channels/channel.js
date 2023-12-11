@@ -85,7 +85,7 @@ const Channel = () => {
     }, [id]);
     
     return (
-        <div>
+        <div className="m-3">
             <h2>Channel Details</h2>
             <hr/>
             {channel ? (
@@ -132,7 +132,7 @@ const Channel = () => {
                                value={channel.country}
                                onChange={(e) => setChannel({...channel, country: e.target.value})}/>
                         <br/>
-                        <button className="btn btn-primary"
+                        <button className="btn btn-primary me-3"
                                 onClick={() => client.updateChannel(channel)}>
                             Update Channel
                         </button>
