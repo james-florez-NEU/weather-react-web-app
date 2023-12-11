@@ -3,6 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import * as client from "../client/client";
 import WeatherCard from "../card/weatherCard";
 import ChannelCard from "../card/channelCard";
+import "./index.css";
 
 function Results() {
     const [locations, setLocations] = useState(null);
@@ -33,7 +34,7 @@ function Results() {
     }, [search]);
 
     return (
-        <div>
+        <div className="m-3">
             <h1>Results for search "{search}"</h1>
             {locations && (
                 <div className="d-flex flex-wrap">
@@ -41,19 +42,19 @@ function Results() {
                         locations
                             .map((location, index) => (
                                 <Link to={`../details/${location.id}`}>
-                                    <div key={index} className="card">
+                                    <div key={index} className="card result-card m-2">
                                         <div>
-                                            <h2 className="card-title">{location.name}</h2>
-                                            <p className="card-text">Region: {location.region}</p>
-                                            <p className="card-text">Country: {location.country}</p>
-                                            <p className="card-text">Latitude: {location.lat}</p>
-                                            <p className="card-text">Longitude: {location.lon}</p>
+                                            <h2 className="card-title m-2">{location.name}</h2>
+                                            <p className="card-text m-2">Region: {location.region}</p>
+                                            <p className="card-text m-2">Country: {location.country}</p>
+                                            <p className="card-text m-2">Latitude: {location.lat}</p>
+                                            <p className="card-text m-2">Longitude: {location.lon}</p>
                                         </div>
                                         <div>
-                                            <h3>Current Weather</h3>
-                                            <WeatherCard id={location.id} />
-                                            <h3>Weather Channels for this Location</h3>
-                                            {channels && (
+                                            <h3 className="m-2">Current Weather</h3>
+                                            <WeatherCard className="weather-card" id={location.id} />
+                                            <h3 className="m-2">Weather Channels</h3>
+                                            {(channels && (channels.filter((channel) => channel.location_id === location.id).length !==0)) ? (
                                                 <div className="d-flex flex-wrap">
                                                     {channels
                                                         .filter((channel) => channel.location_id === location.id)
@@ -64,6 +65,8 @@ function Results() {
                                                         ))}
                                                 </div>
 
+                                            ) : (
+                                                <p className="m-2">No weather channels have been created for this location yet.</p>
                                             )}
                                         </div>
                                     </div>
